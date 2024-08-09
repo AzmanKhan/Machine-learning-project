@@ -1,4 +1,10 @@
 import sys
+import os
+
+# Add the project root directory to sys.path
+project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(project_root)
+
 from src.logger import logging
 
 def error_message_details(error,error_detail:sys):
@@ -16,4 +22,11 @@ class CustomException(Exception):
     
     def __str__(self):
         return self.error_message
+
+if __name__== "__main__":
     
+    try:
+        a = 1 / 0  # This will raise a ZeroDivisionError
+    except Exception as e:
+        logging.info("Divide by zero")
+        raise CustomException(e,sys)
