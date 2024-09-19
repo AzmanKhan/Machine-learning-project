@@ -24,7 +24,7 @@ class DataTransformation:
 
     def get_data_transformer_object(self):
         '''
-        This function si responsible for data trnasformation
+        This function is responsible for data transformation
         
         '''
         try:
@@ -39,8 +39,8 @@ class DataTransformation:
 
             num_pipeline= Pipeline(
                 steps=[
-                ("imputer",SimpleImputer(strategy="median")),
-                ("scaler",StandardScaler())
+                ("imputer",SimpleImputer(strategy="median")),#handling the missing values
+                ("scaler",StandardScaler()) # doing standard scaling
 
                 ]
             )
@@ -48,8 +48,8 @@ class DataTransformation:
             cat_pipeline=Pipeline(
 
                 steps=[
-                ("imputer",SimpleImputer(strategy="most_frequent")),
-                ("one_hot_encoder",OneHotEncoder()),
+                ("imputer",SimpleImputer(strategy="most_frequent")), 
+                ("one_hot_encoder",OneHotEncoder()), 
                 ("scaler",StandardScaler(with_mean=False))
                 ]
 
@@ -102,7 +102,7 @@ class DataTransformation:
             input_feature_test_arr=preprocessing_obj.transform(input_feature_test_df)
 
             train_arr = np.c_[
-                input_feature_train_arr, np.array(target_feature_train_df)
+                input_feature_train_arr, np.array(target_feature_train_df) # joining the two array by np.c
             ]
             test_arr = np.c_[input_feature_test_arr, np.array(target_feature_test_df)]
 
